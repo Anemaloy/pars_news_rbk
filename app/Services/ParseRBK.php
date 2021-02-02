@@ -50,11 +50,15 @@ class ParseRBK
             $xpath_article = new \DOMXpath($article_dom);
             $title = $xpath_article->query("//h1[@class='article__header__title-in js-slide-title']");
             $content = $xpath_article->query("//div[@class='article__text article__text_free']");
+
+            if ($content->length == 0) continue;
+
             foreach($content[0]->childNodes as $content_element) {
                 if ($content_element->nodeName == 'p') {
                     $content_article[] = $content_element->nodeValue;
                 }
             }
+           
             $check_on_article = Article::where('title', trim($title[0]->nodeValue))->first();
             if ($check_on_article == null) {
                 foreach ($article->childNodes as $va) {

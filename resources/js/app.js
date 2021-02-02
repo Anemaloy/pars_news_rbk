@@ -14,10 +14,14 @@ Vue.prototype.$http = axios
 import { api } from './api.js';
 Vue.prototype.$api = api;
 
+//Load Vue Router
+import router from './router'
+
 window.Vue = require('vue').default;
 
 window.onload = function () {
     new Vue({
+        router,
         render: h => h(App)
     }).$mount('#app')
 }

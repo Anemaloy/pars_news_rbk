@@ -56,7 +56,8 @@ class ArticlesController extends Controller
     public function show($id)
     {
         //
-
+        $article = Article::with('categories')->find($id);
+        return response()->json($article);
     }
 
     /**

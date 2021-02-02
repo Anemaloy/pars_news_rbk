@@ -1,11 +1,16 @@
 <template>
-    <div class="container">
-        <router-view />
+    <div  class="container">
+        <pars-button @loaded="fetchAllArticles()"></pars-button>
+        <template v-if="articles.length > 0" >
+            <articles-block :articles="articles"></articles-block>
+        </template>
+        <p v-else> Новостей нет. Попробуйте загрузить</p>
     </div>
 </template>
 
 <script>
     import parsButton  from './../components/Loader.vue'
+    import articlesBlock  from './../components/Article.vue'
 
     export default {
         data () {
@@ -14,7 +19,8 @@
             }
         },
         components: {
-            parsButton
+            parsButton,
+            articlesBlock
         },
         created() {
             this.fetchAllArticles();
